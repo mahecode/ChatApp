@@ -20,6 +20,19 @@ $('.message-form').on('submit', (e) =>{
 
   });
 });
+
+var location = $('.send-location');
+location.on('click', () =>{
+  if(!navigator.geolocation){
+    return alert('Geolocation not supported by your browser');
+  }
+  navigator.geolocation.getCurrentPosition((position) =>{
+
+  }, () =>{
+    alert('Unable to fetch location');
+  }
+});
+
 socket.on('disconnect', ()=>{
   console.log('Disconnected from server');
 });
