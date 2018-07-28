@@ -18,7 +18,7 @@ io.on('connection', (socket)=>{
   socket.emit('newMessage', generateMessage('admin', 'Welcome to chat app'));
   socket.broadcast.emit('newMessage', generateMessage('admin', 'New user joined'));
 
-  socket.on('createMessage',(message)=>{
+  socket.on('createMessage',(message , callback)=>{
     console.log("New message:",message);
     io.emit('newMessage', generateMessage(message.from, message.message));
     // socket.broadcast.emit('newMessage',{
@@ -26,6 +26,7 @@ io.on('connection', (socket)=>{
     //   message: message.message,
     //   createdAt: new Date().getTime()
     // })
+    callback('This string is passed from server');
   });
   socket.on('disconnect', () =>{
     console.log('User Disconnected');
